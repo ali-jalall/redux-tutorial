@@ -1,6 +1,7 @@
 import React from "react";
 import Counter from "./components/Counter";
-import { createStore } from "redux";
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
 
 import { Provider } from "react-redux";
 
@@ -30,12 +31,8 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "DECREMENT" });
-store.dispatch({ type: "RESET" });
 const App = () => {
   return (
     <Provider store={store}>
